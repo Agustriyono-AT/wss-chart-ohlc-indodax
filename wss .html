@@ -1,0 +1,26 @@
+<script type="text/javascript">
+let socket = new WebSocket("wss://kline.indodax.com/ws/");
+
+socket.onopen = function(e) {
+ 
+  socket.send('{"sub":"btcidr.kline.1d", "id":"2"}');
+};
+
+socket.onmessage = function(event) {
+  console.log(`  ${event.data}`);
+};
+
+socket.onclose = function(event) {
+  if (event.wasClean) {
+   console.log(`[close] Connection putus, code=${event.code} reason=${event.reason}`);
+  } else {
+     
+    console.log('[close] Connection  putus');
+  }
+};
+
+socket.onerror = function(error) {
+  console.log (`[error] ${error.message}`);
+};
+
+</script>
